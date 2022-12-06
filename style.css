@@ -406,19 +406,19 @@ a:visited {
 
   .key {
     width: min(
-      30px,
+      25px,
       calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size)))
     );
     height: min(
-      30px,
+      25px,
       calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size)))
     );
     font-size: min(
-      15px,
+      12px,
       calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) * 0.5))
     );
     line-height: min(
-      30px,
+      25px,
       calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size)))
     );
   }
