@@ -348,7 +348,7 @@ footer {
   right: 0;
   bottom: 100px;
   height: 5vh;
-  background-color: var(--background);
+  background-color: transparent;
   text-align: right;
   padding: 0 2rem;
 }
