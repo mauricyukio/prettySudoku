@@ -346,7 +346,7 @@ footer {
   font-size: 12px;
   position: fixed;
   right: 0;
-  bottom: 100px;
+  bottom: 0;
   height: 5vh;
   background-color: transparent;
   text-align: right;
@@ -459,5 +459,6 @@ a:visited {
   footer {
     font-size: 10px;
     text-align: center;
+    bottom: 100px;
   }
 }
