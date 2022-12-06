@@ -449,7 +449,7 @@ a:visited {
   }
 
   .buttons-container {
-    95vw;
+    width: 95vw;
   }
 
   .btn {
@@ -460,5 +460,9 @@ a:visited {
   footer {
     font-size: 10px;
     text-align: center;
+  }
+
+  .icon {
+    font-size: 0.8rem;
   }
 }
