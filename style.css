@@ -33,7 +33,6 @@ html {
 }
 
 body {
-  background-color: black;
   overflow: hidden;
   font-size: 10px;
   font-family: sans-serif;
@@ -347,6 +346,7 @@ footer {
   font-size: 12px;
   position: absolute;
   bottom: 0;
+  width: 100vw;
   height: 5vh;
   background-color: var(--background);
   text-align: right;
