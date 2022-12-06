@@ -4,9 +4,9 @@
 
   --main: #111;
   --light: #555;
-  --lighter: #CCC;
-  --lightest: #EEE;
-  --background: #EEEEEE55;
+  --lighter: #ccc;
+  --lightest: #eee;
+  --background: #eeeeee55;
 }
 
 ::moz-selection {
@@ -24,7 +24,9 @@ html {
   text-decoration: none;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
@@ -146,7 +148,8 @@ main {
   border-radius: 5px;
 }
 
-.cell, .key {
+.cell,
+.key {
   width: calc(var(--board-size) / var(--sub-size) / var(--sub-size) - 1px);
   height: calc(var(--board-size) / var(--sub-size) / var(--sub-size) - 1px);
   font-size: calc(var(--board-size) / var(--sub-size) / var(--sub-size) * 0.5);
@@ -266,43 +269,43 @@ h1 {
 }
 
 #theme-0 {
-  background: linear-gradient(45deg, #111, #555, #CCC, #EEE 75%);
+  background: linear-gradient(45deg, #111, #555, #ccc, #eee 75%);
 }
 
 #theme-1 {
-  background: linear-gradient(45deg, #2C3333, #395B64, #A5C9CA, #E7F6F2 75%);
+  background: linear-gradient(45deg, #2c3333, #395b64, #a5c9ca, #e7f6f2 75%);
 }
 
 #theme-2 {
-  background: linear-gradient(45deg, #553C8B, #9EA9F0, #CCC1FF, #FFEAFE 75%);
+  background: linear-gradient(45deg, #553c8b, #9ea9f0, #ccc1ff, #ffeafe 75%);
 }
 
 #theme-3 {
-  background: linear-gradient(45deg, #00005C, #6A097D, #C060A1, #FFDCB4 75%);
+  background: linear-gradient(45deg, #00005c, #6a097d, #c060a1, #ffdcb4 75%);
 }
 
 #theme-4 {
-  background: linear-gradient(45deg, #1B262C, #0F4C75, #3282B8, #BBE1FA 75%);
+  background: linear-gradient(45deg, #1b262c, #0f4c75, #3282b8, #bbe1fa 75%);
 }
 
 #theme-5 {
-  background: linear-gradient(45deg, #3D0E1E, #D1274B, #F88020, #FFF4E4 75%);
+  background: linear-gradient(45deg, #3d0e1e, #d1274b, #f88020, #fff4e4 75%);
 }
 
 #theme-6 {
-  background: linear-gradient(45deg, #1B1919, #616F39, #A7D129, #F8EEB4 75%);
+  background: linear-gradient(45deg, #1b1919, #616f39, #a7d129, #f8eeb4 75%);
 }
 
 #theme-7 {
-  background: linear-gradient(45deg, #00334E, #145374, #5588A3, #E8E8E8 75%);
+  background: linear-gradient(45deg, #00334e, #145374, #5588a3, #e8e8e8 75%);
 }
 
 #theme-8 {
-  background: linear-gradient(45deg, #2C3639, #3F4E4F, #A27B5C, #DCD7C9 75%);
+  background: linear-gradient(45deg, #2c3639, #3f4e4f, #a27b5c, #dcd7c9 75%);
 }
 
 #theme-9 {
-  background: linear-gradient(45deg, #060930, #333456, #595B83, #F4ABC4 75%);
+  background: linear-gradient(45deg, #060930, #333456, #595b83, #f4abc4 75%);
 }
 
 .buttons-container {
@@ -349,7 +352,9 @@ footer {
   padding: 0 2rem;
 }
 
-a, a:active, a:visited {
+a,
+a:active,
+a:visited {
   text-decoration: none;
   color: var(--lighter);
 }
@@ -359,8 +364,7 @@ a, a:active, a:visited {
   font-size: 1.2rem;
 }
 
-@media only screen and (max-width: 780px),
-       only screen and (max-height: 820px) {
+@media only screen and (max-width: 780px), only screen and (max-height: 820px) {
   .board {
     width: calc(min(23.7vw, 18vh) * var(--sub-size));
     height: calc(min(23.7vw, 18vh) * var(--sub-size));
@@ -372,11 +376,20 @@ a, a:active, a:visited {
     height: calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size)));
   }
 
-  .cell, .key {
-    width: calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) - 1px));
-    height: calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) - 1px));
-    font-size: calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) * 0.5));
-    line-height: calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size)));
+  .cell,
+  .key {
+    width: calc(
+      calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) - 1px)
+    );
+    height: calc(
+      calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) - 1px)
+    );
+    font-size: calc(
+      calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) * 0.5)
+    );
+    line-height: calc(
+      calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size))
+    );
   }
 
   .numpad {
@@ -384,7 +397,9 @@ a, a:active, a:visited {
     top: 85%;
     left: 50%;
     width: calc(min(23.7vw, 18vh) * var(--sub-size));
-    height: height: calc(calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) - 1px));
+    height: calc(
+      calc(min(23.7vw, 18vh) * var(--sub-size) / var(--sub-size) / var(--sub-size) - 1px)
+    );
     flex-direction: row;
   }
 
