@@ -393,7 +393,7 @@ a:visited {
   }
 
   .numpad {
-    position: relative;
+    position: absolute;
     top: 85%;
     left: 50%;
     width: calc(min(23.7vw, 18vh) * var(--sub-size));
