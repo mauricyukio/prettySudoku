@@ -445,11 +445,11 @@ a:visited {
   }
 
   .sizes-container {
-    width: calc(min(23.7vw, 18vh) * var(--sub-size));
+    width: 95vw;
   }
 
   .buttons-container {
-    width: calc(min(23.7vw, 18vh) * var(--sub-size));
+    95vw;
   }
 
   .btn {
