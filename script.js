@@ -7,6 +7,7 @@ const themeButtonsElem = document.querySelectorAll('.theme-btn');
 const sizeButtonsElem = document.querySelectorAll('.size-btn');
 const resetButtonElem = document.querySelector('#reset-btn');
 const checkButtonElem = document.querySelector('#check-btn');
+const changeThemeButtonElem = document.querySelector('#change-theme');
 let subGridsElem = {};
 let cellsElem = {};
 let keysElem = {};
@@ -16,8 +17,10 @@ choiceButtonsElem.forEach((button) => button.addEventListener('click', handleCho
 sizeButtonsElem.forEach((button) => button.addEventListener('focus', showMessage));
 resetButtonElem.addEventListener('click', showMessage);
 checkButtonElem.addEventListener('click', showMessage);
+changeThemeButtonElem.addEventListener('click', changeTheme);
 
 let nextSize = 9;
+let currentTheme = 0;
 
 start();
 
@@ -120,6 +123,13 @@ function showMessage(e) {
   }
   faderElem.style.display = 'block';
   messageElem.style.display = 'block';
+}
+
+// Change the page's theme to the next theme when using smaller screens
+function changeTheme() {
+  currentTheme++;
+  currentTheme = currentTheme > 9 ? currentTheme - 10 : currentTheme;
+  themeButtonsElem[currentTheme].click();
 }
 
 // Set the theme and color scheme for the page
