@@ -471,10 +471,16 @@ function displayBoard(board) {
       document.documentElement.style.setProperty('--board-size', '300px');
       break;
     case 9:
-      document.documentElement.style.setProperty('--board-size', '520px');
+      document.documentElement.style.setProperty(
+        '--board-size',
+        `${Math.min(520, innerHeight * 0.75)}px`
+      );
       break;
     case 16:
-      document.documentElement.style.setProperty('--board-size', '650px');
+      document.documentElement.style.setProperty(
+        '--board-size',
+        `${Math.min(650, innerHeight * 0.75)}px`
+      );
       break;
   }
 
