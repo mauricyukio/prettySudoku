@@ -34,14 +34,25 @@ After solving both, I figured I could expand on those two functions and build a 
 
 - **Standard sudoku app visual aid**: User can easily see what cell they have selected at any moment, as well as all cells related to it (same row, same column, same box or same value), via color highlighting.
 
-- **No standard sudoku app _highlight mistakes_ and _give hint_ functionality**: User cannot instantly check via cell colorization whether the number they just inputted is right for that cell or not, nor ask the app for "a hint", aka the app straight up filling a cell for them. From a game design perspective, I believe those functionalities detract from the experience and trivialize the game, so I opted to leave them out.
+- **No standard sudoku app _highlight mistakes_ and _give hint_ functionality**: User cannot instantly check via cell colorization whether the number they just inputted is right for that cell or not, nor ask the app for _"a hint"_, aka the app straight up filling a cell for them. From a game design perspective, I believe those functionalities detract from the experience and trivialize the game, so I opted to leave them out.
 
 - **Multiple board sizes**: User can choose among three puzzle sizes (_2x2_, _3x3_ and _4x4_). When I found out _2x2_ and _4x4_ sudoku puzzles existed, I made a point to include them in the app.
 
 Some things that have changed since the idea's conception were:
 
-- The app was initially supposed to have at least two difficulty settings, one easy mode for casual / beginner players, and a hard mode for more advanced ones. The two ways I had thought of implementing it were either having the puzzle generator generate a random puzzle until it had more than a set number of empty cells for the user to fill for the hard mode, or implementing advanced sudoku techniques such as the XY-Wing in a separate `solveAdvanced()` to use in the generator function, thus also requiring the user to make use of those for their own solution. I ended up deciding against the difficulty setting option mainly for game design reasons. My vision was for the app to stand alone, just be what it is and provide a fair challenge for those seeking it. I wanted the puzzles to be solvable by pure simple logic only, without the need for prior knowledge of advanced techniques. This is the other side of the coin of not holding the player by the hand via "hints" or instantly highlighting mistakes. Generally speaking (and stretching quite a bit), the app should pretty much follow the design philosophy FromSoftware's [souls](https://en.wikipedia.org/wiki/Dark_Souls) games are widely known for: the challenge is there, immutable, to be overcome through effort and practice. Furthermore, the user already had the option to regulate difficulty by choosing the board size, with smaller boards meaning easier puzzles, so an additional layer of difficulty settings would be redundant, if not straight up confusing.
-- Hex board
+- The app was initially supposed to have at least two difficulty settings, one easy mode for casual / beginner players, and a hard mode for more advanced ones. The two ways I had thought of implementing it were either having the puzzle generator generate a random puzzle until it had more than a set number of empty cells for the user to fill for the hard mode, or implementing advanced sudoku techniques such as the XY-Wing in a separate `solveAdvanced()` to use in the generator function, thus also requiring the user to make use of those for their own solution. I ended up deciding against the difficulty setting option mainly for game design reasons. My vision was for the app to stand alone, just be what it is and provide a fair challenge for those seeking it. I wanted the puzzles to be solvable by pure simple logic only, without the need for prior knowledge of advanced techniques. This is the other side of the coin of not holding the player by the hand via _"hints"_ or instantly highlighting mistakes. Generally speaking (and stretching quite a bit), the app should pretty much follow the design philosophy FromSoftware's [souls](https://en.wikipedia.org/wiki/Dark_Souls) games are widely known for: the challenge is there, immutable, to be overcome through effort and practice. Furthermore, the user already had the option to regulate difficulty by choosing the board size, with smaller boards meaning easier puzzles, so an additional layer of difficulty settings would be redundant, if not straight up confusing.
+
+- I opted for using the hexadecimal system to represent all the possible digits for a _16x16_ puzzle, instead of the numbers 1-16. I explain my reasoning further on the next section.
+
+- After a peer revision with an UX Designer, _aka_ my brother, it was pointed out to me that I should give the choice buttons different visual weights, thus better conveying to the user what the expected action for them to take is. That was achieved by giving the more colorful background-color only for the option with more weight, as well as using another color with less contrast for the lesser option. I debated for quite a while on what option should be the one with more weight in this case, since the user theoretically already expressed their willingness to perform the action via clicking a button, but at the same time I had to consider that all of the performable confirmation actions were irreversible and would result in losing progress on the current puzzle, should the user click the confirmation option by mistake. Considering the irreversibility of the action, in the end I chose to give the "cancel" button more weight, in order to minimize accidental "board clears" or "new games". As for the order of the buttons on the screen, I chose to go with the Apple / Google guidelines, as explained on this [article](https://uxplanet.org/primary-secondary-action-buttons-c16df9b36150) for I believe it's more intuitive. Below is a demonstration of how the UI was before, and how it came to be after the aforementioned changes:
+
+Before: <br/>
+<img src="images/before.png" alt="before changes" width="400"/>
+
+After: <br/>
+<img src="images/after.png" alt="after changes" width="400"/>
+
+- Other UX improvements that were added later were the ability to exit the warning message screen by clicking outside of the warning box or pressing the "Escape" key, implemented by simply adding an event listener to the "fader" element and to the document, respectively; and the auto-check for win once the board is complete, dispensing the need for the user to manually click the "Check Answer" button. Furthermore, keyboard shortcuts were added for all the buttons, except for the message confirmation button, again, to avoid accidental progress loss.
 
 <br/>
 
@@ -173,7 +184,7 @@ Along with the main `displayBoard()` function, the following functions were also
   dehexify() { transform letters on the board from A to G into the corresponding numbers 10 to 16 }
 ```
 
-This was a major decision I made when implementing this part of the code, because I had the option to go with the numbers 1 to 16 for the 16x16 sudoku, which arguably would have been easier, since I wouldn't then need to work with strings and conversions, and trying to compare strings to integers (which happened quite a few times). I decided on going for the 1-9 A-G route mainly for three reasons:
+This was a major decision I made when implementing this part of the code, because I had the option to go with the numbers 1 to 16 for the _16x16_ sudoku, which arguably would have been easier, since I wouldn't then need to work with strings and conversions, and trying to compare strings to integers (which happened quite a few times). I decided on going for the 1-9 A-G route mainly for three reasons:
 
 - It would be easier for the user to grasp the whole board by not filling it with a bunch of _1s_,
 - It would be cleaner and look way better from a design perspective with all single digit characters instead of some single and some double.
@@ -233,6 +244,12 @@ I spent a whole day working on the responsiveness of the design, which in itself
 
 ```
   changeTheme() { changes the page's theme to the next theme when using smaller screens }
+```
+
+After the peer review, I improved the user experience of the app, making it more intuitive and easy to use. One of the new features I added was the automatic checking after the last cell on the board has been filled. Now, instead of having to manually click the "Check Answer" button, the app will fire the checking function automatically once the board has been completed.
+
+```
+  checkWin() { automatically checks whether the user completed the puzzle correctly or not, when there are no more empty cells }
 ```
 
 Finally, there is the function

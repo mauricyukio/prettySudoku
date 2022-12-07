@@ -57,6 +57,10 @@ header {
   align-self: center;
 }
 
+span {
+  align-self: center;
+}
+
 .size-btn {
   position: relative;
   width: 35px;
@@ -215,30 +219,42 @@ main {
   border-radius: 5px;
 }
 
-h1 {
+#name,
+#warning {
   margin-bottom: 30px;
   color: var(--lightest);
 }
 
+.choices-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .choice-btn {
   font-size: 1.2rem;
-  background-color: var(--main);
-  color: var(--lightest);
-  border: 1px solid var(--lightest);
-  margin-bottom: 20px;
+  margin-left: 10px;
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
 }
 
-.choice-btn:hover {
+#choice-no {
   border: 1px solid var(--main);
   background-color: var(--lightest);
   color: var(--main);
 }
 
-#change-theme {
-  display: none;
+#choice-no:hover {
+}
+
+#choice-yes {
+  border: 1px solid var(--lighter);
+  background-color: var(--main);
+  color: var(--lighter);
+}
+
+#choice-yes:hover {
 }
 
 .themes-container {
@@ -434,10 +450,6 @@ a:visited {
 
   .themes-container {
     display: none;
-  }
-
-  #change-theme {
-    display: block;
   }
 
   .message {

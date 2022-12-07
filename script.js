@@ -1,34 +1,110 @@
+// DOM ELEMENTS
 const boardElem = document.querySelector('.board');
 const numpadElem = document.querySelector('.numpad');
 const faderElem = document.querySelector('.fader');
 const messageElem = document.querySelector('.message');
 const choiceButtonsElem = document.querySelectorAll('.choice-btn');
+const name = document.querySelector('#name');
+const warning = document.querySelector('#warning');
+const choiceNo = document.querySelector('#choice-no');
+const choiceYes = document.querySelector('#choice-yes');
 const themeButtonsElem = document.querySelectorAll('.theme-btn');
 const sizeButtonsElem = document.querySelectorAll('.size-btn');
 const resetButtonElem = document.querySelector('#reset-btn');
 const checkButtonElem = document.querySelector('#check-btn');
-const changeThemeButtonElem = document.querySelector('#change-theme');
+const changeThemeButtonElem = document.querySelector('#change-theme-btn');
 let subGridsElem = {};
 let cellsElem = {};
 let keysElem = {};
 
+// EVENT LISTENERS
 themeButtonsElem.forEach((button) => button.addEventListener('click', setTheme));
 choiceButtonsElem.forEach((button) => button.addEventListener('click', handleChoice));
 sizeButtonsElem.forEach((button) => button.addEventListener('focus', showMessage));
 resetButtonElem.addEventListener('click', showMessage);
 checkButtonElem.addEventListener('click', showMessage);
 changeThemeButtonElem.addEventListener('click', changeTheme);
+faderElem.addEventListener('click', () => document.getElementById('choice-no').click());
+document.addEventListener('keydown', (e) => {
+  const key = e.key;
+  switch (key) {
+    case 'Escape':
+      document.getElementById('choice-no').click();
+      break;
+    case 'q':
+      document.getElementById('theme-0').click();
+      break;
+    case 'w':
+      document.getElementById('theme-1').click();
+      break;
+    case 'e':
+      document.getElementById('theme-2').click();
+      break;
+    case 'r':
+      document.getElementById('theme-3').click();
+      break;
+    case 't':
+      document.getElementById('theme-4').click();
+      break;
+    case 'y':
+      document.getElementById('theme-5').click();
+      break;
+    case 'u':
+      document.getElementById('theme-6').click();
+      break;
+    case 'i':
+      document.getElementById('theme-7').click();
+      break;
+    case 'o':
+      document.getElementById('theme-8').click();
+      break;
+    case 'p':
+      document.getElementById('theme-9').click();
+      break;
+    case 'a':
+      document.getElementById('size-4').focus();
+      break;
+    case 's':
+      document.getElementById('size-9').focus();
+      break;
+    case 'd':
+      document.getElementById('size-16').focus();
+      break;
+    case 'z':
+      resetButtonElem.click();
+      break;
+    case 'x':
+      checkButtonElem.click();
+      break;
+    case 'c':
+      changeThemeButtonElem.click();
+      break;
+  }
+});
 
 let nextSize = 9;
 let currentTheme = 0;
 
 start();
 
+// FUNCTIONS
 // Load the page for the first time, along with the first puzzle
 function start() {
   puzzle = generatePuzzle(nextSize);
   displayBoard(puzzle);
   updatePage();
+}
+
+// Automatically check whether the user completed the puzzle correctly or not, when there are no more empty cells
+function checkWin() {
+  let board = readBoard();
+  console.log(board);
+  for (let row of board) {
+    if (row.includes(NaN)) {
+      return;
+    }
+  }
+  checkButtonElem.click();
 }
 
 // Rewrite the board in the HTML element as a Javascript array
@@ -81,12 +157,13 @@ function handleChoice(e) {
   }
 }
 
-// Show message alerting that the game will start anew and ask for user confirmation
+// Show message alerting the user about irreversible action and asking for confirmation
 function showMessage(e) {
-  document.querySelector('#warning').innerText =
+  name.innerText = '- NEW GAME- ';
+  warning.innerText =
     'This action will create a new game and you will lose progress on the current one. Do you wish to continue?';
-  document.querySelector('#choice-yes').innerText = 'Yes, I want to start a new game';
-  document.querySelector('#choice-no').innerText = 'No, let me keep working on this one';
+  choiceNo.innerText = 'Cancel';
+  choiceYes.innerText = 'New Game';
 
   switch (e.target.id) {
     case 'size-4':
@@ -100,24 +177,26 @@ function showMessage(e) {
       break;
     case 'reset-btn':
       nextSize = false;
-      document.querySelector('#warning').innerText =
+      name.innerText = '- CLEAR BOARD -';
+      warning.innerText =
         'This action will clear / reset the board and you will lose progress on this puzzle. Do you wish to continue?';
-      document.querySelector('#choice-yes').innerText = 'Yes, I want to clear the board';
-      document.querySelector('#choice-no').innerText = 'No, let me keep working';
+      choiceNo.innerText = 'Cancel';
+      choiceYes.innerText = 'Clear Board';
       break;
     case 'check-btn':
       nextSize = subGridsElem.length;
       let solved = readBoard();
       if (isValidSolution(solved)) {
-        document.querySelector('#warning').innerText =
+        name.innerText = '- CHECK ANSWER -';
+        warning.innerText =
           'Congratulations! You solved this sudoku puzzle! Do you wish to start the next one?';
-        document.querySelector('#choice-yes').innerText = 'Yes, next one, please!';
-        document.querySelector('#choice-no').innerText = 'No, let me stare at it for a minute';
+        choiceNo.innerText = 'Cancel';
+        choiceYes.innerText = 'Next Puzzle';
       } else {
-        document.querySelector('#warning').innerText =
-          'Hmm, not quite right. Do you want to keep trying a little more?';
-        document.querySelector('#choice-yes').innerText = 'No. Take me to the next puzzle, please';
-        document.querySelector('#choice-no').innerText = 'Yes, I will get it, just wait!';
+        name.innerText = '- CHECK ANSWER -';
+        warning.innerText = 'Hmm, not quite right. Do you want to keep trying a little more?';
+        choiceNo.innerText = 'Yes, I will get it!';
+        choiceYes.innerText = 'Next Puzzle';
       }
       break;
   }
@@ -294,6 +373,7 @@ function handleSelect(e) {
             break;
         }
     }
+    checkWin();
   });
 }
 
@@ -346,6 +426,7 @@ function handleNumpadClick(e) {
     selectedCellElem.innerText = e.target.innerText;
   }
   selectedCellElem.focus();
+  checkWin();
 }
 
 // Display numpad on the HTML page
@@ -847,7 +928,7 @@ function isValidSolution(board) {
   // Check for validity
   return arrays.every(
     (arr) =>
-      JSON.stringify(arr.sort((a, b) => a - b)) ==
+      JSON.stringify(arr.sort((a, b) => a - b)) ===
       JSON.stringify([...Array(boardSize).keys()].map((n) => n + 1))
   );
 }
