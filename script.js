@@ -6,6 +6,7 @@ const messageElem = document.querySelector('.message');
 const choiceButtonsElem = document.querySelectorAll('.choice-btn');
 const name = document.querySelector('#name');
 const warning = document.querySelector('#warning');
+const messageIcon = document.querySelector('.message-icon');
 const choiceNo = document.querySelector('#choice-no');
 const choiceYes = document.querySelector('#choice-yes');
 const themeButtonsElem = document.querySelectorAll('.theme-btn');
@@ -37,37 +38,37 @@ document.addEventListener('keydown', (e) => {
     case 'w':
       document.getElementById('theme-1').click();
       break;
-    case 'e':
+    case 'r':
       document.getElementById('theme-2').click();
       break;
-    case 'r':
+    case 't':
       document.getElementById('theme-3').click();
       break;
-    case 't':
+    case 'y':
       document.getElementById('theme-4').click();
       break;
-    case 'y':
+    case 'u':
       document.getElementById('theme-5').click();
       break;
-    case 'u':
+    case 'i':
       document.getElementById('theme-6').click();
       break;
-    case 'i':
+    case 'o':
       document.getElementById('theme-7').click();
       break;
-    case 'o':
+    case 'p':
       document.getElementById('theme-8').click();
       break;
-    case 'p':
+    case 's':
       document.getElementById('theme-9').click();
       break;
-    case 'a':
+    case 'h':
       document.getElementById('size-4').focus();
       break;
-    case 's':
+    case 'j':
       document.getElementById('size-9').focus();
       break;
-    case 'd':
+    case 'k':
       document.getElementById('size-16').focus();
       break;
     case 'z':
@@ -76,7 +77,7 @@ document.addEventListener('keydown', (e) => {
     case 'x':
       checkButtonElem.click();
       break;
-    case 'c':
+    case 'm':
       changeThemeButtonElem.click();
       break;
   }
@@ -98,7 +99,6 @@ function start() {
 // Automatically check whether the user completed the puzzle correctly or not, when there are no more empty cells
 function checkWin() {
   let board = readBoard();
-  console.log(board);
   for (let row of board) {
     if (row.includes(NaN)) {
       return;
@@ -164,6 +164,8 @@ function showMessage(e) {
     'This action will create a new game and you will lose progress on the current one. Do you wish to continue?';
   choiceNo.innerText = 'Cancel';
   choiceYes.innerText = 'New Game';
+  messageIcon.setAttribute('class', 'message-icon');
+  messageIcon.classList.add('message-icon', 'fa-solid', 'fa-file');
 
   switch (e.target.id) {
     case 'size-4':
@@ -182,6 +184,8 @@ function showMessage(e) {
         'This action will clear / reset the board and you will lose progress on this puzzle. Do you wish to continue?';
       choiceNo.innerText = 'Cancel';
       choiceYes.innerText = 'Clear Board';
+      messageIcon.setAttribute('class', 'message-icon');
+      messageIcon.classList.add('message-icon', 'fa-solid', 'fa-trash');
       break;
     case 'check-btn':
       nextSize = subGridsElem.length;
@@ -192,11 +196,15 @@ function showMessage(e) {
           'Congratulations! You solved this sudoku puzzle! Do you wish to start the next one?';
         choiceNo.innerText = 'Cancel';
         choiceYes.innerText = 'Next Puzzle';
+        messageIcon.setAttribute('class', 'message-icon');
+        messageIcon.classList.add('message-icon', 'fa-solid', 'fa-trophy');
       } else {
         name.innerText = '- CHECK ANSWER -';
-        warning.innerText = 'Hmm, not quite right. Do you want to keep trying a little more?';
-        choiceNo.innerText = 'Yes, I will get it!';
+        warning.innerText = 'Hmm, not quite right. Do you wish to try the next puzzle?';
+        choiceNo.innerText = 'Keep trying';
         choiceYes.innerText = 'Next Puzzle';
+        messageIcon.setAttribute('class', 'message-icon');
+        messageIcon.classList.add('message-icon', 'fa-solid', 'fa-face-frown');
       }
       break;
   }
@@ -229,11 +237,11 @@ function setTheme(e) {
       document.documentElement.style.setProperty('--background', '#E7F6F255');
       break;
     case 'theme-2':
-      document.documentElement.style.setProperty('--main', '#553C8B');
-      document.documentElement.style.setProperty('--light', '#9EA9F0');
-      document.documentElement.style.setProperty('--lighter', '#CCC1FF');
-      document.documentElement.style.setProperty('--lightest', '#FFEAFE');
-      document.documentElement.style.setProperty('--background', '#FFEAFE55');
+      document.documentElement.style.setProperty('--main', '#1C2B2D');
+      document.documentElement.style.setProperty('--light', '#1F6F8B');
+      document.documentElement.style.setProperty('--lighter', '#99A8B2');
+      document.documentElement.style.setProperty('--lightest', '#E6D5B8');
+      document.documentElement.style.setProperty('--background', '#E6D5B855');
       break;
     case 'theme-3':
       document.documentElement.style.setProperty('--main', '#00005C');
