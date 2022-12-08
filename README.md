@@ -9,7 +9,7 @@ This project was made as the final project for Harvard's CS50 course.
 
 ## **Video Demo**
 
-URL
+https://youtu.be/HDnO2QsBvc8
 
 <br/>
 
