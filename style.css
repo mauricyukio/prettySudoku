@@ -235,6 +235,10 @@ main {
   margin-bottom: 2.5rem;
 }
 
+hr {
+  margin-bottom: 2.5rem;
+}
+
 .choices-container {
   width: 100%;
   display: flex;
